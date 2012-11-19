@@ -11,5 +11,5 @@
   <li>2. Add directly in the theme</li>
   <li>3. short code for pages and posts</li>
   </ul>
-  Check official website for <a target="_blank" href='http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/'>more information</a>
+  Check official website for more information <a target="_blank" href='http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/'>click here</a>
 </div>

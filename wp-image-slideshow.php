@@ -1,11 +1,11 @@
 <?php
 
 /*
-Plugin Name: wp image slideshow
+Plugin Name: Wp image slideshow
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Description: This is advanced version of my drop in image slideshow gallery. In this gallery each image is dropped into view. Slideshow will pause on mouse over.
 Author: Gopi.R
-Version: 8.0
+Version: 9.0
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags: image, slideshow, gallery, dropin, drop in
@@ -18,9 +18,7 @@ define("WP_wpis_TABLE", $wpdb->prefix . "wpis_plugin");
 
 function wpis() 
 {
-	
 	global $wpdb;
-	
 	$wpis_title = get_option('wpis_title');
 	$wpis_width = get_option('wpis_width');
 	$wpis_height = get_option('wpis_height');
@@ -37,7 +35,6 @@ function wpis()
 	if($wpis_random == "YES"){ $sSql = $sSql . " ORDER BY RAND()"; }else{ $sSql = $sSql . " ORDER BY wpis_order"; }
 	
 	$data = $wpdb->get_results($sSql);
-	
 	$wpis_count = 0;
 	$wpis_returnstr = "";
 	if ( ! empty($data) ) 
@@ -49,7 +46,6 @@ function wpis()
 			$wpis_count++;
 		}
 	}	
-	
 	?>
     <script type="text/javascript">
 	var wpis_images=new Array()
@@ -57,14 +53,11 @@ function wpis()
 	new wpis(wpis_images, <?php echo $wpis_width; ?>, <?php echo $wpis_height; ?>, <?php echo $wpis_pause; ?>)
 	</script>
     <?php
-
 }
 
 function wpis_install() 
 {
-	
 	global $wpdb;
-	
 	if($wpdb->get_var("show tables like '". WP_wpis_TABLE . "'") != WP_wpis_TABLE) 
 	{
 		$sSql = "CREATE TABLE IF NOT EXISTS `". WP_wpis_TABLE . "` (";
@@ -98,14 +91,12 @@ function wpis_install()
 		$wpdb->query($sSql);
 
 	}
-
 	add_option('wpis_title', "WP image slideshow");
 	add_option('wpis_width', "250");
 	add_option('wpis_height', "170");
 	add_option('wpis_pause', "3000");
 	add_option('wpis_random', "NO");
 	add_option('wpis_type', "widget");
-
 }
 
 function wpis_control() 
@@ -127,7 +118,6 @@ function wpis_widget($args)
 function wpis_admin_options() 
 {
 	global $wpdb;
-	
 	echo "<div class='wrap'>";
 	echo "<h2>Wp image slideshow</h2>"; 
 	$wpis_title = get_option('wpis_title');
@@ -225,7 +215,6 @@ function wpis_shortcode( $atts )
 	if($wpis_random == "YES"){ $sSql = $sSql . " ORDER BY RAND()"; }else{ $sSql = $sSql . " ORDER BY wpis_order"; }
 	
 	$data = $wpdb->get_results($sSql);
-	
 	$wpis_count = 0;
 	$wpis_returnstr  = "";
 	$Lr = "";
@@ -248,7 +237,6 @@ function wpis_shortcode( $atts )
 	{
 		$Lr = "No records found. please check your short code.";
 	}
-
 	return $Lr;
 }
 
@@ -276,7 +264,7 @@ function wpis_init()
 
 function wpis_deactivation() 
 {
-
+	// No action required
 }
 
 function wpis_add_javascript_files() 

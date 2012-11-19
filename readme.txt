@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags:  drop in, gallery, image, plugin, slideshow
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 8.0
+Tested up to: 3.5
+Stable tag: 9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -132,7 +132,11 @@ Slight change in the short code, Please find the new short code.
 
 = 8.0 =
 
-New demo link, www.gopiplus.com
+New demo link, http://www.gopiplus.com
+
+= 9.0 =
+
+Tested up to 3.5
 
 == Changelog ==
 
@@ -147,15 +151,15 @@ Javascript validation included for admin image management form.
 = 3.0 =	
 
 Javascript added as per W3C standard.
-Tested upto 3.2.1
+Tested up to 3.2.1
 
 = 4.0 =	
 
-Tested upto 3.3
+Tested up to 3.3
 
 = 5.0 =	
 
-Tested upto 3.4
+Tested up to 3.4
 
 = 6.0 =	
 
@@ -168,4 +172,8 @@ Slight change in the short code, Please find the new short code.
 
 = 8.0 =
 
-New demo link, www.gopiplus.com
+New demo link, http://www.gopiplus.com
+
+= 9.0 =
+
+Tested up to 3.5
