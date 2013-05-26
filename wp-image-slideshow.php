@@ -5,7 +5,7 @@ Plugin Name: Wp image slideshow
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Description: This is advanced version of my drop in image slideshow gallery. In this gallery each image is dropped into view. Slideshow will pause on mouse over.
 Author: Gopi.R
-Version: 9.0
+Version: 10.0
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags: image, slideshow, gallery, dropin, drop in
@@ -15,6 +15,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_wpis_TABLE", $wpdb->prefix . "wpis_plugin");
+define("WP_wpis_UNIQUE_NAME", "wpis");
+define("WP_wpis_TITLE", "Wp image slideshow");
+define('WP_wpis_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/">click here</a>');
+define('WP_wpis_FAV', 'http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/');
 
 function wpis() 
 {
@@ -45,14 +49,19 @@ function wpis()
 			$wpis_returnstr = $wpis_returnstr . "wpis_images[$wpis_count]=$wpis_str; ";
 			$wpis_count++;
 		}
+		
+		?>
+		<script type="text/javascript">
+		var wpis_images=new Array()
+		<?php echo $wpis_returnstr; ?>
+		new wpis(wpis_images, <?php echo $wpis_width; ?>, <?php echo $wpis_height; ?>, <?php echo $wpis_pause; ?>)
+		</script>
+		<?php
 	}	
-	?>
-    <script type="text/javascript">
-	var wpis_images=new Array()
-	<?php echo $wpis_returnstr; ?>
-	new wpis(wpis_images, <?php echo $wpis_width; ?>, <?php echo $wpis_height; ?>, <?php echo $wpis_pause; ?>)
-	</script>
-    <?php
+	else
+	{
+		echo "No image(s) available in this Gallery Type. Please check admin widget setting page.";
+	}
 }
 
 function wpis_install() 
@@ -78,16 +87,16 @@ function wpis_install()
 		
 		$IsSql = "INSERT INTO `". WP_wpis_TABLE . "` (`wpis_path`, `wpis_link`, `wpis_target` , `wpis_title` , `wpis_order` , `wpis_status` , `wpis_type` , `wpis_date`)"; 
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_1.jpg', '#', '_blank', 'Image 1', '1', 'YES', 'widget', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_1.jpg', '#', '_blank', 'Image 1', '1', 'YES', 'Widget', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_2.jpg' ,'#', '_blank', 'Image 2', '2', 'YES', 'widget', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_2.jpg' ,'#', '_blank', 'Image 2', '2', 'YES', 'Widget', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_3.jpg', '#', '_blank', 'Image 3', '1', 'YES', 'sample', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_3.jpg', '#', '_blank', 'Image 3', '1', 'YES', 'Sample', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_4.jpg', '#', '_blank', 'Image 4', '2', 'YES', 'sample', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_4.jpg', '#', '_blank', 'Image 4', '2', 'YES', 'Sample', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 
 	}
@@ -118,64 +127,22 @@ function wpis_widget($args)
 function wpis_admin_options() 
 {
 	global $wpdb;
-	echo "<div class='wrap'>";
-	echo "<h2>Wp image slideshow</h2>"; 
-	$wpis_title = get_option('wpis_title');
-	$wpis_width = get_option('wpis_width');
-	$wpis_height = get_option('wpis_height');
-	$wpis_pause = get_option('wpis_pause');
-	$wpis_random = get_option('wpis_random');
-	$wpis_type = get_option('wpis_type');
-	
-	if (@$_POST['wpis_submit']) 
+	$current_page = isset($_GET['ac']) ? $_GET['ac'] : '';
+	switch($current_page)
 	{
-		$wpis_title = stripslashes($_POST['wpis_title']);
-		$wpis_width = stripslashes($_POST['wpis_width']);
-		$wpis_height = stripslashes($_POST['wpis_height']);
-		$wpis_pause = stripslashes($_POST['wpis_pause']);
-		$wpis_random = stripslashes($_POST['wpis_random']);
-		$wpis_type = stripslashes($_POST['wpis_type']);
-
-		update_option('wpis_title', $wpis_title );
-		update_option('wpis_width', $wpis_width );
-		update_option('wpis_height', $wpis_height );
-		update_option('wpis_pause', $wpis_pause );
-		update_option('wpis_random', $wpis_random );
-		update_option('wpis_type', $wpis_type );
+		case 'edit':
+			include('pages/image-management-edit.php');
+			break;
+		case 'add':
+			include('pages/image-management-add.php');
+			break;
+		case 'set':
+			include('pages/image-setting.php');
+			break;
+		default:
+			include('pages/image-management-show.php');
+			break;
 	}
-	
-	echo '<form name="wpis_form" method="post" action="">';
-
-	echo '<p>Title:<br><input  style="width: 450px;" maxlength="200" type="text" value="';
-	echo $wpis_title . '" name="wpis_title" id="wpis_title" /> Widget title.</p>';
-
-	echo '<p>Width:<br><input  style="width: 100px;" maxlength="200" type="text" value="';
-	echo $wpis_width . '" name="wpis_width" id="wpis_width" /> Widget Width (only number).</p>';
-
-	echo '<p>Height:<br><input  style="width: 100px;" maxlength="200" type="text" value="';
-	echo $wpis_height . '" name="wpis_height" id="wpis_height" /> Widget Height (only number).</p>';
-
-	echo '<p>Pause:<br><input  style="width: 100px;" maxlength="4" type="text" value="';
-	echo $wpis_pause . '" name="wpis_pause" id="wpis_pause" /> Only Number / Pause between content change (millisec).</p>';
-
-	echo '<p>Random :<br><input  style="width: 100px;" type="text" value="';
-	echo $wpis_random . '" name="wpis_random" id="wpis_random" /> (YES/NO)</p>';
-
-	echo '<p>Type:<br><input  style="width: 150px;" type="text" value="';
-	echo $wpis_type . '" name="wpis_type" id="wpis_type" /> This field is to group the images.</p>';
-
-	echo '<input name="wpis_submit" id="wpis_submit" class="button-primary" value="Submit" type="submit" />';
-
-	echo '</form>';
-	
-	echo '</div>';
-	?>
-    <div style="float:right;">
-	<input name="text_management1" lang="text_management" class="button-primary" onClick="location.href='options-general.php?page=wp-image-slideshow/image-management.php'" value="Go to - Image Management" type="button" />
-    <input name="setting_management1" lang="setting_management" class="button-primary" onClick="location.href='options-general.php?page=wp-image-slideshow/wp-image-slideshow.php'" value="Go to - Gallery Setting" type="button" />
-    </div>
-    <?php
-	include("help.php");
 }
 
 add_shortcode( 'wp-image-gallery', 'wpis_shortcode' );
@@ -183,17 +150,6 @@ add_shortcode( 'wp-image-gallery', 'wpis_shortcode' );
 function wpis_shortcode( $atts ) 
 {
 	global $wpdb;
-
-	//  old code, before version 7.0
-	//  [WP-IMAGE-GALLERY:TYPE=sample:WIDTH=360:HEIGHT=170:PAUSE=3000:RANDOM=YES]
-	//  $scode = $matches[1];
-	//	list($wpis_type_main, $wpis_width_main, $wpis_height_main, $wpis_pause_main, $wpis_random_main) = split("[:.-]", $scode);
-	//	list($wpis_type_cap, $wpis_type) = split('[=.-]', $wpis_type_main);
-	//	list($wpis_width_cap, $wpis_width) = split('[=.-]', $wpis_width_main);
-	//	list($wpis_height_cap, $wpis_height) = split('[=.-]', $wpis_height_main);
-	//	list($wpis_pause_cap, $wpis_pause) = split('[=.-]', $wpis_pause_main);
-	//	list($wpis_random_cap, $wpis_random) = split('[=.-]', $wpis_random_main);
-	//  old code end
 	
 	//[wp-image-gallery type="sample" width="360" height="170" pause="3000" random="yes"]
 	if ( ! is_array( $atts ) )
@@ -244,8 +200,7 @@ function wpis_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Wp image slideshow', 'Wp image slideshow', 'manage_options', __FILE__, 'wpis_admin_options' );
-		add_options_page('Wp image slideshow', '', 'manage_options', "wp-image-slideshow/image-management.php",'' );
+		add_options_page('Wp image slideshow', 'Wp image slideshow', 'manage_options', "wp-image-slideshow", 'wpis_admin_options' );
 	}
 }
 

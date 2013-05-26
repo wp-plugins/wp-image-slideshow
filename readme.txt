@@ -4,9 +4,9 @@ Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-s
 Author URI: http://www.gopiplus.com/work/
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags:  drop in, gallery, image, plugin, slideshow
-Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 9.0
+Requires at least: 3.4
+Tested up to: 3.6
+Stable tag: 10.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -138,6 +138,11 @@ New demo link, http://www.gopiplus.com
 
 Tested up to 3.5
 
+= 10.0 =
+
+Tested up to 3.6
+Added security feature that wordpress offers us.
+
 == Changelog ==
 
 = 1.0 =				
@@ -177,3 +182,8 @@ New demo link, http://www.gopiplus.com
 = 9.0 =
 
 Tested up to 3.5
+
+= 10.0 =
+
+Tested up to 3.6
+Added security feature that wordpress offers us.
