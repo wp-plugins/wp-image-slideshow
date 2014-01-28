@@ -1,6 +1,6 @@
 /**
  *     wp image slideshow 
- *     Copyright (C) 2011 - 2013 www.gopiplus.com
+ *     Copyright (C) 2011 - 2014 www.gopiplus.com
  *     http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
  * 
  *     This program is free software: you can redistribute it and/or modify
@@ -73,7 +73,6 @@ wpis.prototype.animateslide=function(){
 	}
 }
 
-
 wpis.prototype.setupnextslide=function(){
 	this.wpis_activecanvasindex=(this.wpis_activecanvasindex==0)? 1 : 0
 	this.activecanvas=this.wpis_canvases[this.wpis_activecanvasindex]
@@ -100,4 +99,3 @@ wpis.prototype.init=function(){
 	this.wpis_slideshowref.onmouseout=function(){slideshow.isMouseover=0}
 	setTimeout(function(){slideshow.rotateslide()}, this.delay)
 }
-

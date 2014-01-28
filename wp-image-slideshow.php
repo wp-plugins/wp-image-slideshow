@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: Wp image slideshow
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Description: This is advanced version of my drop in image slideshow gallery. In this gallery each image is dropped into view. Slideshow will pause on mouse over.
 Author: Gopi.R
-Version: 10.0
+Version: 10.1
 Author URI: http://www.gopiplus.com/work/
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags: image, slideshow, gallery, dropin, drop in
@@ -15,10 +14,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 global $wpdb, $wp_version;
 define("WP_wpis_TABLE", $wpdb->prefix . "wpis_plugin");
-define("WP_wpis_UNIQUE_NAME", "wpis");
-define("WP_wpis_TITLE", "Wp image slideshow");
-define('WP_wpis_LINK', 'Check official website for more information <a target="_blank" href="http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/">click here</a>');
 define('WP_wpis_FAV', 'http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/');
+
+if ( ! defined( 'WP_wpis_BASENAME' ) )
+	define( 'WP_wpis_BASENAME', plugin_basename( __FILE__ ) );
+	
+if ( ! defined( 'WP_wpis_PLUGIN_NAME' ) )
+	define( 'WP_wpis_PLUGIN_NAME', trim( dirname( WP_wpis_BASENAME ), '/' ) );
+	
+if ( ! defined( 'WP_wpis_PLUGIN_URL' ) )
+	define( 'WP_wpis_PLUGIN_URL', WP_PLUGIN_URL . '/' . WP_wpis_PLUGIN_NAME );
+	
+if ( ! defined( 'WP_wpis_ADMIN_URL' ) )
+	define( 'WP_wpis_ADMIN_URL', get_option('siteurl') . '/wp-admin/options-general.php?page=wp-image-slideshow' );
 
 function wpis() 
 {
@@ -30,9 +38,9 @@ function wpis()
 	$wpis_random = get_option('wpis_random');
 	$wpis_type = get_option('wpis_type');
 	
-	if(!is_numeric(@$wpis_width)) { @$wpis_width = 200 ;}
-	if(!is_numeric(@$wpis_height)) { @$wpis_height = 200; }
-	if(!is_numeric(@$wpis_pause)) { @$wpis_pause = 3000; }
+	if(!is_numeric($wpis_width)) { $wpis_width = 200 ;}
+	if(!is_numeric($wpis_height)) { $wpis_height = 200; }
+	if(!is_numeric($wpis_pause)) { $wpis_pause = 3000; }
 	
 	$sSql = "select wpis_path,wpis_link,wpis_target,wpis_title from ".WP_wpis_TABLE." where 1=1";
 	if($wpis_type <> ""){ $sSql = $sSql . " and wpis_type='".$wpis_type."'"; }
@@ -60,7 +68,8 @@ function wpis()
 	}	
 	else
 	{
-		echo "No image(s) available in this Gallery Type. Please check admin widget setting page.";
+		_e('No image(s) available in this Gallery Type. Please check admin widget setting page.', 'wp-image-slideshow');
+		echo " Gallery Type: " . $wpis_type;
 	}
 }
 
@@ -82,21 +91,21 @@ function wpis_install()
 		$sSql = $sSql . "`wpis_extra2` VARCHAR( 100 ) NOT NULL ,";
 		$sSql = $sSql . "`wpis_date` datetime NOT NULL default '0000-00-00 00:00:00' ,";
 		$sSql = $sSql . "PRIMARY KEY ( `wpis_id` )";
-		$sSql = $sSql . ")";
+		$sSql = $sSql . ") ENGINE=MyISAM  DEFAULT CHARSET=utf8;";
 		$wpdb->query($sSql);
 		
 		$IsSql = "INSERT INTO `". WP_wpis_TABLE . "` (`wpis_path`, `wpis_link`, `wpis_target` , `wpis_title` , `wpis_order` , `wpis_status` , `wpis_type` , `wpis_date`)"; 
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_1.jpg', '#', '_blank', 'Image 1', '1', 'YES', 'Widget', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".WP_wpis_PLUGIN_URL."/images/250x167_1.jpg', '#', '_blank', 'Image 1', '1', 'YES', 'Widget', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_2.jpg' ,'#', '_blank', 'Image 2', '2', 'YES', 'Widget', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".WP_wpis_PLUGIN_URL."/images/250x167_2.jpg' ,'#', '_blank', 'Image 2', '2', 'YES', 'Widget', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_3.jpg', '#', '_blank', 'Image 3', '1', 'YES', 'Sample', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".WP_wpis_PLUGIN_URL."/images/250x167_3.jpg', '#', '_blank', 'Image 3', '1', 'YES', 'Sample', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 		
-		$sSql = $IsSql . " VALUES ('".get_option('siteurl')."/wp-content/plugins/wp-image-slideshow/images/250x167_4.jpg', '#', '_blank', 'Image 4', '2', 'YES', 'Sample', '0000-00-00 00:00:00');";
+		$sSql = $IsSql . " VALUES ('".WP_wpis_PLUGIN_URL."/images/250x167_4.jpg', '#', '_blank', 'Image 4', '2', 'YES', 'Sample', '0000-00-00 00:00:00');";
 		$wpdb->query($sSql);
 
 	}
@@ -110,8 +119,11 @@ function wpis_install()
 
 function wpis_control() 
 {
-	echo '<p>wp image slideshow: <br><br> To change the setting goto "wp image slideshow" link under SETTING menu. ';
-	echo '<a href="options-general.php?page=wp-image-slideshow/wp-image-slideshow.php">click here</a></p>';
+	echo '<p><b>';
+	 _e('wp image slideshow', 'wp-image-slideshow');
+	echo '.</b> ';
+	_e('Check official website for more information', 'wp-image-slideshow');
+	?> <a target="_blank" href="<?php echo WP_wpis_FAV; ?>"><?php _e('click here', 'wp-image-slideshow'); ?></a></p><?php
 }
 
 function wpis_widget($args) 
@@ -162,9 +174,9 @@ function wpis_shortcode( $atts )
 	$wpis_pause = $atts['pause'];
 	$wpis_random = $atts['random'];
 
-	if(!is_numeric(@$wpis_width)) { @$wpis_width = 250 ;}
-	if(!is_numeric(@$wpis_height)) { @$wpis_height = 200; }
-	if(!is_numeric(@$wpis_pause)) { @$wpis_pause = 3000; }
+	if(!is_numeric($wpis_width)) { $wpis_width = 250 ;}
+	if(!is_numeric($wpis_height)) { $wpis_height = 200; }
+	if(!is_numeric($wpis_pause)) { $wpis_pause = 3000; }
 	
 	$sSql = "select wpis_path,wpis_link,wpis_target,wpis_title from ".WP_wpis_TABLE." where 1=1";
 	if($wpis_type <> ""){ $sSql = $sSql . " and wpis_type='".$wpis_type."'"; }
@@ -191,7 +203,7 @@ function wpis_shortcode( $atts )
 	}
 	else
 	{
-		$Lr = "No records found. please check your short code.";
+		$Lr = __('No records found. please check your short code.', 'wp-image-slideshow');
 	}
 	return $Lr;
 }
@@ -200,7 +212,8 @@ function wpis_add_to_menu()
 {
 	if (is_admin()) 
 	{
-		add_options_page('Wp image slideshow', 'Wp image slideshow', 'manage_options', "wp-image-slideshow", 'wpis_admin_options' );
+		add_options_page(__('Wp image slideshow', 'wp-image-slideshow'), 
+							__('Wp image slideshow', 'wp-image-slideshow'), 'manage_options', "wp-image-slideshow", 'wpis_admin_options' );
 	}
 }
 
@@ -208,12 +221,12 @@ function wpis_init()
 {
 	if(function_exists('wp_register_sidebar_widget')) 
 	{
-		wp_register_sidebar_widget('wp-image-slideshow', 'Wp image slideshow', 'wpis_widget');
+		wp_register_sidebar_widget('wp-image-slideshow', __('Wp image slideshow', 'wp-image-slideshow'), 'wpis_widget');
 	}
 	
 	if(function_exists('wp_register_widget_control')) 
 	{
-		wp_register_widget_control('wp-image-slideshow', array('Wp image slideshow', 'widgets'), 'wpis_control');
+		wp_register_widget_control('wp-image-slideshow', array(__('Wp image slideshow', 'wp-image-slideshow'), 'widgets'), 'wpis_control');
 	} 
 }
 
@@ -226,10 +239,16 @@ function wpis_add_javascript_files()
 {
 	if (!is_admin())
 	{
-		wp_enqueue_script( 'wp-image-slideshow', get_option('siteurl').'/wp-content/plugins/wp-image-slideshow/wp-image-slideshow.js');
-	}	
+		wp_enqueue_script( 'wp-image-slideshow', WP_wpis_PLUGIN_URL.'/wp-image-slideshow.js');
+	}
 }
 
+function wpis_textdomain() 
+{
+	  load_plugin_textdomain( 'wp-image-slideshow', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+
+add_action('plugins_loaded', 'wpis_textdomain');
 add_action('admin_menu', 'wpis_add_to_menu');
 add_action('wp_enqueue_scripts', 'wpis_add_javascript_files');
 add_action("plugins_loaded", "wpis_init");

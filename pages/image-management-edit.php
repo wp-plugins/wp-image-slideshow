@@ -13,7 +13,7 @@ $result = $wpdb->get_var($sSql);
 
 if ($result != '1')
 {
-	?><div class="error fade"><p><strong>Oops, selected details doesn't exist.</strong></p></div><?php
+	?><div class="error fade"><p><strong><?php _e('Oops, selected details doesnt exist', 'wp-image-slideshow'); ?></strong></p></div><?php
 }
 else
 {
@@ -52,14 +52,14 @@ if (isset($_POST['wpis_form_submit']) && $_POST['wpis_form_submit'] == 'yes')
 	$form['wpis_path'] = isset($_POST['wpis_path']) ? $_POST['wpis_path'] : '';
 	if ($form['wpis_path'] == '')
 	{
-		$wpis_errors[] = __('Please enter the image path.', WP_wpis_UNIQUE_NAME);
+		$wpis_errors[] = __('Please enter the image path.', 'wp-image-slideshow');
 		$wpis_error_found = TRUE;
 	}
 
 	$form['wpis_link'] = isset($_POST['wpis_link']) ? $_POST['wpis_link'] : '';
 	if ($form['wpis_link'] == '')
 	{
-		$wpis_errors[] = __('Please enter the target link.', WP_wpis_UNIQUE_NAME);
+		$wpis_errors[] = __('Please enter the target link.', 'wp-image-slideshow');
 		$wpis_error_found = TRUE;
 	}
 	
@@ -87,7 +87,7 @@ if (isset($_POST['wpis_form_submit']) && $_POST['wpis_form_submit'] == 'yes')
 			);
 		$wpdb->query($sSql);
 		
-		$wpis_success = __('Image details was successfully updated.', WP_wpis_UNIQUE_NAME);
+		$wpis_success = __('Image details was successfully updated.', 'wp-image-slideshow');
 	}
 }
 
@@ -99,39 +99,39 @@ if ($wpis_error_found == TRUE && isset($wpis_errors[0]) == TRUE)
   </div>
   <?php
 }
-if ($ltw_tes_error_found == FALSE && strlen($wpis_success) > 0)
+if ($wpis_error_found == FALSE && strlen($wpis_success) > 0)
 {
 ?>
   <div class="updated fade">
-    <p><strong><?php echo $wpis_success; ?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=wp-image-slideshow">Click here</a> to view the details</strong></p>
+    <p><strong><?php echo $wpis_success; ?> <a href="<?php echo WP_wpis_ADMIN_URL; ?>"><?php _e('Click here', 'wp-image-slideshow'); ?></a> <?php _e('view the details', 'wp-image-slideshow'); ?></strong></p>
   </div>
   <?php
 }
 ?>
-<script language="JavaScript" src="<?php echo get_option('siteurl'); ?>/wp-content/plugins/wp-image-slideshow/pages/setting.js"></script>
+<script language="JavaScript" src="<?php echo WP_wpis_PLUGIN_URL; ?>/pages/setting.js"></script>
 <div class="form-wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>
-	<h2><?php echo WP_wpis_TITLE; ?></h2>
+	<h2><?php _e('Wp image slideshow', 'wp-image-slideshow'); ?></h2>
 	<form name="wpis_form" method="post" action="#" onsubmit="return wpis_submit()"  >
-      <h3>Update image details</h3>
-      <label for="tag-image">Enter image path</label>
+      <h3><?php _e('Update image details', 'wp-image-slideshow'); ?></h3>
+      <label for="tag-image"><?php _e('Enter image path', 'wp-image-slideshow'); ?></label>
       <input name="wpis_path" type="text" id="wpis_path" value="<?php echo $form['wpis_path']; ?>" size="125" />
-      <p>Where is the picture located on the internet</p>
-      <label for="tag-link">Enter target link</label>
+      <p><?php _e('Where is the picture located on the internet', 'wp-image-slideshow'); ?></p>
+      <label for="tag-link"><?php _e('Enter target link', 'wp-image-slideshow'); ?></label>
       <input name="wpis_link" type="text" id="wpis_link" value="<?php echo $form['wpis_link']; ?>" size="125" />
-      <p>When someone clicks on the picture, where do you want to send them</p>
-      <label for="tag-target">Enter target option</label>
+      <p><?php _e('When someone clicks on the picture, where do you want to send them', 'wp-image-slideshow'); ?></p>
+      <label for="tag-target"><?php _e('Enter target option', 'wp-image-slideshow'); ?></label>
       <select name="wpis_target" id="wpis_target">
         <option value='_blank' <?php if($form['wpis_target']=='_blank') { echo 'selected' ; } ?>>_blank</option>
         <option value='_parent' <?php if($form['wpis_target']=='_parent') { echo 'selected' ; } ?>>_parent</option>
         <option value='_self' <?php if($form['wpis_target']=='_self') { echo 'selected' ; } ?>>_self</option>
         <option value='_new' <?php if($form['wpis_target']=='_new') { echo 'selected' ; } ?>>_new</option>
       </select>
-      <p>Do you want to open link in new window?</p>
-      <label for="tag-title">Enter image reference</label>
+      <p><?php _e('Do you want to open link in new window?', 'wp-image-slideshow'); ?></p>
+      <label for="tag-title"><?php _e('Enter image reference', 'wp-image-slideshow'); ?></label>
       <input name="wpis_title" type="text" id="wpis_title" value="<?php echo $form['wpis_title']; ?>" size="125" />
-      <p>Enter image reference. This is only for reference.</p>
-      <label for="tag-select-gallery-group">Select gallery type</label>
+      <p><?php _e('Enter image reference. This is only for reference.', 'wp-image-slideshow'); ?></p>
+      <label for="tag-select-gallery-group"><?php _e('Select gallery type', 'wp-image-slideshow'); ?></label>
       <select name="wpis_type" id="wpis_type">
         <option value='GROUP1' <?php if($form['wpis_type']=='GROUP1') { echo 'selected' ; } ?>>Group1</option>
         <option value='GROUP2' <?php if($form['wpis_type']=='GROUP2') { echo 'selected' ; } ?>>Group2</option>
@@ -146,25 +146,28 @@ if ($ltw_tes_error_found == FALSE && strlen($wpis_success) > 0)
 		<option value='widget' <?php if($form['wpis_type']=='Widget') { echo 'selected' ; } ?>>Widget</option>
 		<option value='sample' <?php if($form['wpis_type']=='Sample') { echo 'selected' ; } ?>>Sample</option>
       </select>
-      <p>This is to group the images. Select your slideshow group. </p>
-      <label for="tag-display-status">Display status</label>
+      <p><?php _e('This is to group the images. Select your slideshow group.', 'wp-image-slideshow'); ?></p>
+      <label for="tag-display-status"><?php _e('Display status', 'wp-image-slideshow'); ?></label>
       <select name="wpis_status" id="wpis_status">
         <option value='YES' <?php if($form['wpis_status']=='YES') { echo 'selected' ; } ?>>Yes</option>
         <option value='NO' <?php if($form['wpis_status']=='NO') { echo 'selected' ; } ?>>No</option>
       </select>
-      <p>Do you want the picture to show in your galler?</p>
-      <label for="tag-display-order">Display order</label>
+      <p><?php _e('Do you want the picture to show in your galler?', 'wp-image-slideshow'); ?></p>
+      <label for="tag-display-order"><?php _e('Display order', 'wp-image-slideshow'); ?></label>
       <input name="wpis_order" type="text" id="wpis_order" size="10" value="<?php echo $form['wpis_order']; ?>" maxlength="3" />
-      <p>What order should the picture be played in. should it come 1st, 2nd, 3rd, etc.</p>
+      <p><?php _e('What order should the picture be played in. should it come 1st, 2nd, 3rd, etc.', 'wp-image-slideshow'); ?></p>
       <input name="wpis_id" id="wpis_id" type="hidden" value="">
       <input type="hidden" name="wpis_form_submit" value="yes"/>
       <p class="submit">
-        <input name="publish" lang="publish" class="button-primary" value="Update Details" type="submit" />
-        <input name="publish" lang="publish" class="button-primary" onclick="wpis_redirect()" value="Cancel" type="button" />
-        <input name="Help" lang="publish" class="button-primary" onclick="wpis_help()" value="Help" type="button" />
+        <input name="publish" lang="publish" class="button-primary" value="<?php _e('Update Details', 'wp-image-slideshow'); ?>" type="submit" />
+        <input name="publish" lang="publish" class="button-primary" onclick="wpis_redirect()" value="<?php _e('Cancel', 'wp-image-slideshow'); ?>" type="button" />
+        <input name="Help" lang="publish" class="button-primary" onclick="wpis_help()" value="<?php _e('Help', 'wp-image-slideshow'); ?>" type="button" />
       </p>
 	  <?php wp_nonce_field('wpis_form_edit'); ?>
     </form>
 </div>
-<p class="description"><?php echo WP_wpis_LINK; ?></p>
+<p class="description">
+	<?php _e('Check official website for more information', 'wp-image-slideshow'); ?>
+	<a target="_blank" href="<?php echo WP_wpis_FAV; ?>"><?php _e('click here', 'wp-image-slideshow'); ?></a>
+</p>
 </div>
