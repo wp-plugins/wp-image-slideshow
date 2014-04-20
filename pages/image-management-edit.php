@@ -1,3 +1,4 @@
+<?php if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); } ?>
 <div class="wrap">
 <?php
 $did = isset($_GET['did']) ? $_GET['did'] : '0';
@@ -93,19 +94,20 @@ if (isset($_POST['wpis_form_submit']) && $_POST['wpis_form_submit'] == 'yes')
 
 if ($wpis_error_found == TRUE && isset($wpis_errors[0]) == TRUE)
 {
-?>
-  <div class="error fade">
-    <p><strong><?php echo $wpis_errors[0]; ?></strong></p>
-  </div>
-  <?php
+	?>
+	<div class="error fade">
+		<p><strong><?php echo $wpis_errors[0]; ?></strong></p>
+	</div>
+	<?php
 }
 if ($wpis_error_found == FALSE && strlen($wpis_success) > 0)
 {
-?>
-  <div class="updated fade">
-    <p><strong><?php echo $wpis_success; ?> <a href="<?php echo WP_wpis_ADMIN_URL; ?>"><?php _e('Click here', 'wp-image-slideshow'); ?></a> <?php _e('view the details', 'wp-image-slideshow'); ?></strong></p>
-  </div>
-  <?php
+	?>
+	<div class="updated fade">
+		<p><strong><?php echo $wpis_success; ?> <a href="<?php echo WP_wpis_ADMIN_URL; ?>"><?php _e('Click here', 'wp-image-slideshow'); ?></a> 
+		<?php _e('view the details', 'wp-image-slideshow'); ?></strong></p>
+	</div>
+	<?php
 }
 ?>
 <script language="JavaScript" src="<?php echo WP_wpis_PLUGIN_URL; ?>/pages/setting.js"></script>

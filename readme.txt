@@ -1,12 +1,12 @@
 === wp image slideshow ===
 Contributors: www.gopiplus.com, gopiplus
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
-Author URI: http://www.gopiplus.com/work/
+Author URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
-Tags:  drop in, gallery, image, plugin, slideshow
+Tags:  gallery, image, plugin, slideshow
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 10.1
+Tested up to: 3.9
+Stable tag: 10.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -149,6 +149,11 @@ Added security feature that wordpress offers us.
 2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
 Plugin *.po file (wp-image-slideshow.po) available in the languages folder. Translators Welcome.
 
+= 10.2 =
+
+1. Tested up to 3.9
+2. Added small security feature.
+
 == Changelog ==
 
 = 1.0 =				
@@ -199,3 +204,8 @@ Added security feature that wordpress offers us.
 1. Tested up to 3.8
 2. Now this plugin supports localization (or internationalization). i.e. option to translate into other languages. 
 Plugin *.po file (wp-image-slideshow.po) available in the languages folder. Translators Welcome.
+
+= 10.2 =
+
+1. Tested up to 3.9
+2. Added small security feature.

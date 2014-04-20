@@ -3,14 +3,16 @@
 Plugin Name: Wp image slideshow
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Description: This is advanced version of my drop in image slideshow gallery. In this gallery each image is dropped into view. Slideshow will pause on mouse over.
-Author: Gopi.R
-Version: 10.1
-Author URI: http://www.gopiplus.com/work/
+Author: Gopi Ramasamy
+Version: 10.2
+Author URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags: image, slideshow, gallery, dropin, drop in
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('You are not allowed to call this page directly.'); }
 
 global $wpdb, $wp_version;
 define("WP_wpis_TABLE", $wpdb->prefix . "wpis_plugin");
