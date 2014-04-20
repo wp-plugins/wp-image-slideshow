@@ -3,7 +3,7 @@ Contributors: www.gopiplus.com, gopiplus
 Donate link: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Author URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
-Tags:  gallery, image, plugin, slideshow
+Tags:  gallery, image, slideshow
 Requires at least: 3.4
 Tested up to: 3.9
 Stable tag: 10.2
@@ -94,9 +94,9 @@ http://www.gopiplus.com/work/2011/04/25/wordpress-plugin-up-down-image-slideshow
 
 == Screenshots ==
 
-1. http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
+1. Front Page. http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 
-2. http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
+2. Admin. http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 
 == Upgrade Notice ==
 
@@ -209,3 +209,4 @@ Plugin *.po file (wp-image-slideshow.po) available in the languages folder. Tran
 
 1. Tested up to 3.9
 2. Added small security feature.
+
