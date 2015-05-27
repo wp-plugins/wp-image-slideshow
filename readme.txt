@@ -5,8 +5,8 @@ Author URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-sl
 Plugin URI: http://www.gopiplus.com/work/2011/05/06/wordpress-plugin-wp-image-slideshow/
 Tags:  gallery, image, slideshow
 Requires at least: 3.4
-Tested up to: 4.1
-Stable tag: 10.4
+Tested up to: 4.2.2
+Stable tag: 10.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	
@@ -141,6 +141,10 @@ Plugin *.po file (wp-image-slideshow.po) available in the languages folder. Tran
 
 1. Tested up to 4.1
 
+= 10.5 =
+
+1. Tested up to 4.2.2
+
 == Changelog ==
 
 = 1.0 =				
@@ -204,3 +208,7 @@ Plugin *.po file (wp-image-slideshow.po) available in the languages folder. Tran
 = 10.4 =
 
 1. Tested up to 4.1
+
+= 10.5 =
+
+1. Tested up to 4.2.2
