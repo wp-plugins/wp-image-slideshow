@@ -86,17 +86,44 @@ if ($wpis_error_found == FALSE && strlen($wpis_success) > 0)
 	}
 ?>
 <script language="JavaScript" src="<?php echo WP_wpis_PLUGIN_URL; ?>/pages/setting.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+    $('#upload-btn').click(function(e) {
+        e.preventDefault();
+        var image = wp.media({ 
+            title: 'Upload Image',
+            // mutiple: true if you want to upload multiple files at once
+            multiple: false
+        }).open()
+        .on('select', function(e){
+            // This will return the selected image from the Media Uploader, the result is an object
+            var uploaded_image = image.state().get('selection').first();
+            // We convert uploaded_image to a JSON object to make accessing it easier
+            // Output to the console uploaded_image
+            console.log(uploaded_image);
+            var img_imageurl = uploaded_image.toJSON().url;
+            // Let's assign the url value to the input field
+            $('#wpis_path').val(img_imageurl);
+        });
+    });
+});
+</script>
+<?php
+wp_enqueue_script('jquery'); // jQuery
+wp_enqueue_media(); // This will enqueue the Media Uploader script
+?>
 <div class="form-wrap">
 	<div id="icon-edit" class="icon32 icon32-posts-post"><br></div>
 	<h2><?php _e('Wp image slideshow', 'wp-image-slideshow'); ?></h2>
 	<form name="wpis_form" method="post" action="#" onsubmit="return wpis_submit()"  >
       <h3><?php _e('Add new image details', 'wp-image-slideshow'); ?></h3>
       <label for="tag-image"><?php _e('Enter image path', 'wp-image-slideshow'); ?></label>
-      <input name="wpis_path" type="text" id="wpis_path" value="" size="125" />
+      <input name="wpis_path" type="text" id="wpis_path" value="" size="90" />
+	  <input type="button" name="upload-btn" id="upload-btn" class="button-secondary" value="Upload Image">
       <p><?php _e('Where is the picture located on the internet', 'wp-image-slideshow'); ?>
 	   (Ex: http://www.gopiplus.com/work/wp-content/uploads/pluginimages/250x167/250x167_2.jpg)</p>
       <label for="tag-link"><?php _e('Enter target link', 'wp-image-slideshow'); ?></label>
-      <input name="wpis_link" type="text" id="wpis_link" value="#" size="125" />
+      <input name="wpis_link" type="text" id="wpis_link" value="#" size="90" />
       <p><?php _e('When someone clicks on the picture, where do you want to send them', 'wp-image-slideshow'); ?></p>
       <label for="tag-target"><?php _e('Enter target option', 'wp-image-slideshow'); ?></label>
       <select name="wpis_target" id="wpis_target">
@@ -107,7 +134,7 @@ if ($wpis_error_found == FALSE && strlen($wpis_success) > 0)
       </select>
       <p><?php _e('Do you want to open link in new window?', 'wp-image-slideshow'); ?></p>
       <label for="tag-title"><?php _e('Enter image reference', 'wp-image-slideshow'); ?></label>
-      <input name="wpis_title" type="text" id="wpis_title" value="" size="125" />
+      <input name="wpis_title" type="text" id="wpis_title" value="" size="90" />
       <p><?php _e('Enter image reference. This is only for reference.', 'wp-image-slideshow'); ?></p>
       <label for="tag-select-gallery-group"><?php _e('Select gallery type', 'wp-image-slideshow'); ?></label>
       <select name="wpis_type" id="wpis_type">

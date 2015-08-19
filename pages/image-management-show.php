@@ -4,6 +4,7 @@
 if (isset($_POST['frm_wpis_display']) && $_POST['frm_wpis_display'] == 'yes')
 {
 	$did = isset($_GET['did']) ? $_GET['did'] : '0';
+	if(!is_numeric($did)) { die('<p>Are you sure you want to do this?</p>'); }
 	
 	$wpis_success = '';
 	$wpis_success_msg = FALSE;
@@ -62,7 +63,7 @@ if (isset($_POST['frm_wpis_display']) && $_POST['frm_wpis_display'] == 'yes')
       <table width="100%" class="widefat" id="straymanage">
         <thead>
           <tr>
-            <th  class="check-column" scope="row"><input type="checkbox" /></th>
+            <th  class="check-column" scope="row" style="padding: 8px 2px;"><input type="checkbox" /></th>
 			<th scope="col"><?php _e('Type', 'wp-image-slideshow'); ?></th>
             <th scope="col"><?php _e('Image URL', 'wp-image-slideshow'); ?></th>
 			<th scope="col"><?php _e('Target', 'wp-image-slideshow'); ?></th>
@@ -72,7 +73,7 @@ if (isset($_POST['frm_wpis_display']) && $_POST['frm_wpis_display'] == 'yes')
         </thead>
 		<tfoot>
           <tr>
-            <th  class="check-column" scope="row"><input type="checkbox" /></th>
+            <th  class="check-column" scope="row" style="padding: 8px 2px;"><input type="checkbox" /></th>
 			<th scope="col"><?php _e('Type', 'wp-image-slideshow'); ?></th>
             <th scope="col"><?php _e('Image URL', 'wp-image-slideshow'); ?></th>
 			<th scope="col"><?php _e('Target', 'wp-image-slideshow'); ?></th>
